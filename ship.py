@@ -18,7 +18,7 @@ class Ship():
         self.settings = settings
         
         # Load the ship image and get its rect.
-        self.image = pygame.image.load('Images/ship.png')
+        self.image = pygame.image.load('./Images/ship.png')
         self.rect = self.image.get_rect()
         self.screenRect = self.screen.get_rect()
         
