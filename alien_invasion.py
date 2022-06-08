@@ -6,10 +6,10 @@ from ship import Ship
 from gameStats import GameStats
 from button import Button
 from scoreboard import Scoreboard
-import gameFunctions as gf
+import gameFunctions as Gf
 
 
-def runGame():
+def run_game():
     # Initialize game and create a screen object.
     pygame.init()
     
@@ -32,28 +32,28 @@ def runGame():
     playButton = Button(settings=settings, screen=screen, message='Play')
     
     # Create the fleet of aliens
-    gf.createFleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
+    Gf.createFleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
     
     # Start the main loop for the game.
     while True:
-        gf.checkEvents(settings=settings, screen=screen, gameStats=gameStats,
+        Gf.checkEvents(settings=settings, screen=screen, gameStats=gameStats,
                        playButton=playButton, ship=ship, aliens=aliens,
                        bullets=bullets)
         
         if gameStats.gameActive:
             ship.updatePosition()
-            gf.updateBullets(settings=settings, screen=screen, 
+            Gf.updateBullets(settings=settings, screen=screen,
                              scoreboard=scoreboard, gameStats=gameStats,
                              ship=ship, bullets=bullets, aliens=aliens)
             
-            gf.updateAliens(settings=settings, screen=screen, gameStats=gameStats,
+            Gf.updateAliens(settings=settings, screen=screen, gameStats=gameStats,
                             ship=ship, aliens=aliens, bullets=bullets)  
             
-        gf.updateScreen(settings=settings, screen=screen, scoreboard=scoreboard,
+        Gf.updateScreen(settings=settings, screen=screen, scoreboard=scoreboard,
                         ship=ship, aliens=aliens, bullets=bullets, 
                         gameStats=gameStats, playButton=playButton)
 
 
-
-runGame()
+if __name__ == '__main__':
+    run_game()
     
