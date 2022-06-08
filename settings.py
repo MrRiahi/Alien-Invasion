@@ -1,13 +1,9 @@
-class Settings():
+
+class Settings:
     """
-    A class to store all settings for Alien Invasion.
-    
-    Author: MrR
-    Date: Sunday - 2020 17 May
+    Settings of Alien Invasion game.
     """
-    
-    
-    
+
     def __init__(self):
         """ Initialize the game's settings. """
         

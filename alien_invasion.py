@@ -3,10 +3,10 @@ from pygame.sprite import Group
 
 from settings import Settings
 from ship import Ship
-from gameStats import GameStats
+from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
-import gameFunctions as Gf
+import game_functions as gf
 
 
 def run_game():
@@ -32,24 +32,24 @@ def run_game():
     playButton = Button(settings=settings, screen=screen, message='Play')
     
     # Create the fleet of aliens
-    Gf.createFleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
+    gf.createFleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
     
     # Start the main loop for the game.
     while True:
-        Gf.checkEvents(settings=settings, screen=screen, gameStats=gameStats,
+        gf.checkEvents(settings=settings, screen=screen, gameStats=gameStats,
                        playButton=playButton, ship=ship, aliens=aliens,
                        bullets=bullets)
         
         if gameStats.gameActive:
             ship.updatePosition()
-            Gf.updateBullets(settings=settings, screen=screen,
+            gf.updateBullets(settings=settings, screen=screen,
                              scoreboard=scoreboard, gameStats=gameStats,
                              ship=ship, bullets=bullets, aliens=aliens)
             
-            Gf.updateAliens(settings=settings, screen=screen, gameStats=gameStats,
+            gf.updateAliens(settings=settings, screen=screen, gameStats=gameStats,
                             ship=ship, aliens=aliens, bullets=bullets)  
             
-        Gf.updateScreen(settings=settings, screen=screen, scoreboard=scoreboard,
+        gf.updateScreen(settings=settings, screen=screen, scoreboard=scoreboard,
                         ship=ship, aliens=aliens, bullets=bullets, 
                         gameStats=gameStats, playButton=playButton)
 
