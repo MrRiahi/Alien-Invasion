@@ -343,7 +343,7 @@ def restart_game(settings, screen, game_statistics, ship, aliens, bullets):
         
         # Create a new fleet and center the ship.
         create_fleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
-        ship.centerShip()
+        ship.center_ship()
     
         # Pause.
         sleep(0.5)
