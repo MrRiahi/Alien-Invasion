@@ -1,12 +1,12 @@
 import pygame
 from pygame.sprite import Group
 
-from settings import Settings
-from ship import Ship
-from game_stats import GameStats
-from button import Button
-from scoreboard import Scoreboard
-import game_functions as gf
+from src.ship import Ship
+from src.button import Button
+import src.game_functions as gf
+from src.settings import Settings
+from src.scoreboard import Scoreboard
+from src.game_statistics import GameStatistics
 
 
 def run_game():
@@ -15,13 +15,13 @@ def run_game():
     
     # Screen settings
     settings = Settings()
-    screen = pygame.display.set_mode((settings.screenWidth, settings.screenHeight))
+    screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
     
     # Create an instance to store game statistics.
-    gameStats = GameStats(settings=settings)
+    game_statistics = GameStatistics(settings=settings)
     
-    scoreboard = Scoreboard(settings=settings, screen=screen, gameStats=gameStats)
+    scoreboard = Scoreboard(settings=settings, screen=screen, game_statistics=game_statistics)
     
     # Make a ship, a group of bullets, and a group of aliens.
     ship = Ship(settings=settings, screen=screen)
@@ -29,29 +29,29 @@ def run_game():
     bullets = Group()
     
     # Make a play button
-    playButton = Button(settings=settings, screen=screen, message='Play')
+    play_button = Button(screen=screen, message='Play')
     
     # Create the fleet of aliens
-    gf.createFleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
+    gf.create_fleet(settings=settings, screen=screen, ship=ship, aliens=aliens)
     
     # Start the main loop for the game.
     while True:
-        gf.checkEvents(settings=settings, screen=screen, gameStats=gameStats,
-                       playButton=playButton, ship=ship, aliens=aliens,
-                       bullets=bullets)
+        gf.check_events(settings=settings, screen=screen, game_statistics=game_statistics,
+                        play_button=play_button, ship=ship, aliens=aliens,
+                        bullets=bullets)
         
-        if gameStats.gameActive:
-            ship.updatePosition()
-            gf.updateBullets(settings=settings, screen=screen,
-                             scoreboard=scoreboard, gameStats=gameStats,
-                             ship=ship, bullets=bullets, aliens=aliens)
+        if game_statistics.game_active:
+            ship.update_position()
+            gf.update_bullets(settings=settings, screen=screen,
+                              scoreboard=scoreboard, game_statistics=game_statistics,
+                              ship=ship, bullets=bullets, aliens=aliens)
             
-            gf.updateAliens(settings=settings, screen=screen, gameStats=gameStats,
-                            ship=ship, aliens=aliens, bullets=bullets)  
+            gf.update_aliens(settings=settings, screen=screen, game_statistics=game_statistics,
+                             ship=ship, aliens=aliens, bullets=bullets)
             
-        gf.updateScreen(settings=settings, screen=screen, scoreboard=scoreboard,
-                        ship=ship, aliens=aliens, bullets=bullets, 
-                        gameStats=gameStats, playButton=playButton)
+        gf.update_screen(settings=settings, screen=screen, scoreboard=scoreboard,
+                         ship=ship, aliens=aliens, bullets=bullets,
+                         game_statistics=game_statistics, play_button=play_button)
 
 
 if __name__ == '__main__':
