@@ -32,9 +32,36 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+## Run
+To play the game, run the `alien_invasion.py`.
+
+```bash
+python alien_invasion.py
+```
+
+## Docker
+Build the alien_invasion docker image with the following command:
+
+```bash
+$ docker \
+    build \
+    --tag alien_invasion \
+    .
+```
+
+To run the image in a container:
+
+```bash
+$ docker container run \
+	-it \ 
+	--rm \
+	--name alien_invasion \
+	 alien_invasion
+```
 
 ## TODO
-- [ ] Refactor with PEP 8 coding style
+- [x] Refactor with PEP 8 coding style
+- [x] Create a Dockerfile
 - [ ] Add unit tests
 - [ ] Add TDD
 - [ ] Add new features
